@@ -87,7 +87,8 @@ class MainContainer(GridLayout):
 
     def log(self, value):
         if value:
-            self.entry_calc.text = str(float(math.log(float(self.entry_calc.text), 10)))
+            value = self.equal(value)
+            self.entry_calc.text = str(math.log10(float(value)))
 
     def equal(self, value):
         if value:
