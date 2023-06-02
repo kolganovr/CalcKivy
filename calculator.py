@@ -13,7 +13,8 @@ class MainContainer(GridLayout):
 
     def square(self, value):
         if value:
-            self.entry_calc.text = str(float(self.entry_calc.text)**2)
+            value = self.equal(value)
+            self.entry_calc.text = str(float(value)**2)
 
     def power(self, value):
         if value:
@@ -25,24 +26,28 @@ class MainContainer(GridLayout):
 
     def sin(self, value):
         if value:
-            self.entry_calc.text = str(math.sin(math.degrees(float(self.entry_calc.text))))
+            value = self.equal(value)
+            self.entry_calc.text = str(math.sin(math.radians(float(value))))
 
     def cos(self, value):
         if value:
-            self.entry_calc.text = str(math.cos(math.degrees(float(self.entry_calc.text))))
+            value = self.equal(value)
+            self.entry_calc.text = str(math.cos(math.radians(float(value))))
 
     def tan(self, value):
         if value:
-            self.entry_calc.text = str(math.tan(math.degrees(float(self.entry_calc.text))))
+            value = self.equal(value)
+            self.entry_calc.text = str(math.tan(math.radians(float(value))))
 
     def ten_power(self, value):
         if value:
-            self.entry_calc.text = str(10**float(self.entry_calc.text))
+            value = self.equal(value)
+            self.entry_calc.text = str(10**float(value))
 
     def sub(self, value):
         if value:
             try:
-                self.x1 = self.entry_calc.text
+                self.x1 = self.equal(value)
                 self.entry_calc.text += '÷'
             except Exception:
                 self.entry_calc.text += ""
@@ -50,18 +55,22 @@ class MainContainer(GridLayout):
     def Mod(self, value):
         if value:
             try:
-                self.x1 = self.entry_calc.text
+                self.x1 = self.equal(value)
                 self.entry_calc.text += 'Mod'
             except Exception:
                 self.entry_calc.text += ""
 
     def fact(self, value):
         if value:
-            self.entry_calc.text = str(math.factorial(int(self.entry_calc.text)))
+            value = self.equal(value)
+            self.entry_calc.text = str(math.factorial(int(value)))
 
     def square_root(self, value):
         if value:
-            self.entry_calc.text = str(math.sqrt(float(self.entry_calc.text)))
+            # Сначала выполняем все операции, а потом извлекаем корень
+            value = self.equal(value)
+            self.entry_calc.text = str(math.sqrt(float(value)))
+
     def Up(self, value):
         if value:
             try:
@@ -77,13 +86,13 @@ class MainContainer(GridLayout):
             except Exception:
                 pass
 
+    # Изменение знака числа
     def upsidedown(self, value):
         if value:
-            if self.entry_calc.text[0] != '-':
-                minus = '-'
-                minus += self.entry_calc.text
-            # else:
-            #     self.entry_calc.text
+            if self.entry_calc.text[0] == '-':
+                self.entry_calc.text = self.entry_calc.text[1:]
+            else:
+                self.entry_calc.text = '-' + self.entry_calc.text
 
     def log(self, value):
         if value:
@@ -97,7 +106,7 @@ class MainContainer(GridLayout):
                     self.entry_calc.text = str(float(self.x1)**float(self.y1))
                 elif '÷' in self.entry_calc.text:
                     self.y1 = self.entry_calc.text[len(self.x1)+1:]
-                    self.entry_calc.text = str(float(self.x1)//float(self.y1))
+                    self.entry_calc.text = str(float(self.x1)/float(self.y1))
                 elif 'Mod' in self.entry_calc.text:
                     self.y1 = self.entry_calc.text[len(self.x1)+3:]
                     self.entry_calc.text = str(float(self.x1)%float(self.y1))
@@ -105,6 +114,7 @@ class MainContainer(GridLayout):
                     self.entry_calc.text = str(eval(self.entry_calc.text))
             except Exception:
                 self.entry_calc.text = "Error"
+        return self.entry_calc.text
 
 class Calculator(App):
     def build(self):
