@@ -42,7 +42,11 @@ class MainContainer(GridLayout):
     def ten_power(self, value):
         if value:
             value = self.equal(value)
-            self.entry_calc.text = str(10**float(value))
+            # Избегаем переполнения памяти
+            if float(value) > 100:
+                self.entry_calc.text = "Error"
+            else:
+                self.entry_calc.text = str(10**float(value))
 
     def sub(self, value):
         if value:
