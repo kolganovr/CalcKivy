@@ -71,20 +71,11 @@ class MainContainer(GridLayout):
             value = self.equal(value)
             self.entry_calc.text = str(math.sqrt(float(value)))
 
-    def Up(self, value):
+    # Округление числа по правилам математики
+    def Round(self, value):
         if value:
-            try:
-                if '.' in self.entry_calc.text:
-                    if int(self.entry_calc.text[-1]) >= 5:
-                        self.entry_calc.text = self.entry_calc.text[:len(self.entry_calc.text) - 1]
-                        self.rounding = int(self.entry_calc.text[-1])
-                        self.rounding += 1
-                        self.entry_calc.text = self.entry_calc.text[:len(self.entry_calc.text) - 1]
-                        self.entry_calc.text += str(self.rounding)
-                    else:
-                        self.entry_calc.text = self.entry_calc.text[:len(self.entry_calc.text) - 1]
-            except Exception:
-                pass
+            value = self.equal(value)
+            self.entry_calc.text = str(round(float(value)))
 
     # Изменение знака числа
     def upsidedown(self, value):
