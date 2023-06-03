@@ -6,8 +6,8 @@
 <MainContainer>:
     id: calculator
     rows: 8
-    spacing: 7
-    padding: 7
+    spacing: 10
+    padding: 10
     canvas.before:
         Color:
             rgba: [0.15, 0.15, 0.15, 1]
@@ -61,7 +61,7 @@
             on_press: calculator.Mod(entry.text)
     BoxLayout:
         CustB:
-            text: 'Round'
+            text: 'Rnd'
             on_press: calculator.Round(entry.text)
         CustB:
             text: 'CE'
