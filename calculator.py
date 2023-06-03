@@ -30,7 +30,7 @@ class MainContainer(GridLayout):
         if value:
             try:
                 # Сохраняем значение в поле ввода и добавляем знак возведения в степень
-                self.x1 = self.entry_calc.text
+                self.x1 = self.equal(self.entry_calc.text)
                 self.entry_calc.text += '^'
             except Exception:
                 self.entry_calc.text += ""
