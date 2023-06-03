@@ -90,15 +90,21 @@ class MainContainer(GridLayout):
     def fact(self, value):
         if value:
             # Вычисляем значение факториала
-            value = self.equal(value)
-            self.entry_calc.text = str(math.factorial(int(value)))
+            value = float(self.equal(value))
+            if value > 20 or value < 0:
+                self.entry_calc.text = "Error"
+            else:
+                self.entry_calc.text = str(math.factorial(math.floor(value)))
 
     # Метод square_root извлекает квадратный корень из числа, записанного в поле ввода, при нажатии на кнопку «√x».
     def square_root(self, value):
         if value:
             # Вычисляем значение квадратного корня
-            value = self.equal(value)
-            self.entry_calc.text = str(math.sqrt(float(value)))
+            value = float(self.equal(value))
+            if value < 0:
+                self.entry_calc.text = "Error"
+            else:
+                self.entry_calc.text = str(math.sqrt(value))
 
     # Метод Round округляет число, записанное в поле ввода, по правилам математики при нажатии на кнопку «Round».
     def Round(self, value):
